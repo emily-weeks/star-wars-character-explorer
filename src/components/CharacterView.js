@@ -11,8 +11,8 @@ function CharacterView() {
     const location = useLocation();
     const character = location.state;
 
-    
     useEffect(() => {
+        if (!character) return;
         const fetchFilms = async () => {
             try {
                 setLoadingFilm(true);
@@ -38,7 +38,7 @@ function CharacterView() {
                 setFilms(loadedFilms);
             } catch (error) {
                 console.log(error);
-                setFilms(["The force is not strong with this one. Unable to fetch films"]);
+                setFilms(["The force is not strong with this one. Unable to load films"]);
             } finally {
                 setLoadingFilm(false);
             }
@@ -53,7 +53,7 @@ function CharacterView() {
                 setLoadingPlanet(false);
             } catch (error) {
                 console.log(error);
-                setHomeWorld("The force is not strong with this one, unable to fetch homeworld");
+                setHomeWorld("The force is not strong with this one, unable to load homeworld");
                 setLoadingPlanet(false);
             }
         };
@@ -62,29 +62,41 @@ function CharacterView() {
         fetchHomeWorld();
     }, [character]);
 
-  return (
-    <div>
-        <button onClick={() => navigate("/")}>Back to Character List</button>
-        <h3>Character: {character.name}</h3>
-        <p>Height: {character.height} cm</p>
-        <p>Mass: {character.mass} kg</p>
-        <p>Hair Color: {character.hair_color}</p>
-        <p>Skin Color: {character.skin_color}</p>
-        <p>Eye Color: {character.eye_color}</p>
-        <p>Birth Year: {character.birth_year}</p>
-        <p>Gender: {character.gender}</p>
-        <p>Homeworld: {loadingPlanet ? "Loading location..." : homeWorld}</p>
-        <p>Films:</p>
-        <ul>
-            {loadingFilm ? 
-                "Loading films..." 
-            : 
-                films.map((film, index) => (
-                    <li key={index}>{film}</li>
-                ))}
-        </ul>
-    </div>
-  );
-}
+    if (!character) { 
+        return (
+            <div>
+                <h3>Character Data Unavailable</h3>
+                <p>Unable to load character. Please return to the directory and re-select your character.</p>
+                <button onClick={() => navigate("/")}>
+                    Return to Character List
+                </button>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            <button onClick={() => navigate("/")}>Back to Character List</button>
+            <h3>Character: {character.name}</h3>
+            <p>Height: {character.height} cm</p>
+            <p>Mass: {character.mass} kg</p>
+            <p>Hair Color: {character.hair_color}</p>
+            <p>Skin Color: {character.skin_color}</p>
+            <p>Eye Color: {character.eye_color}</p>
+            <p>Birth Year: {character.birth_year}</p>
+            <p>Gender: {character.gender}</p>
+            <p>Homeworld: {loadingPlanet ? "Loading location..." : homeWorld}</p>
+            <p>Films:</p>
+            <ul>
+                {loadingFilm ? 
+                    "Loading films..." 
+                : 
+                    films.map((film, index) => (
+                        <li key={index}>{film}</li>
+                    ))}
+            </ul>
+        </div>
+      );
+    }
 
 export default CharacterView;

@@ -24,19 +24,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Bugs & Rough Edges
 
-Put any issues encountered:
-
-- Films were being double listed
+1. Films were being double listed
 
     - The application was executing independent async fetch requests inside a loop and updating the component state sequentially.
 
     - Added Promise.all() to fetch logic to wait until all calls are finished before assigning results in a single state update
 
-- If even one film request failed, the entire film list would fail to render - need to implement partial rendering of films
+2. If even one film request failed, the entire film list would fail to render - need to implement partial rendering of films
 
     - Promise.all() breaks and reject if one of the promises in the array fails
 
-    - Switch to [Promise.allSettled()]{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled} and check if promise was successful or failed for partial rendering. Also added check for when every film call fails
+    - Switch to [Promise.allSettled()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled) and check if promise was successful or failed for partial rendering. Also added check for when every film call fails
+
+3. If user were to try to open the character-view/id url, the page crashes
+
+    - The component was unable to find location.state in this scenario. 
+    
+    - Added check for character information and when none available, display a fallback screen that includes an error message and a button to navigate the user back to character list page
 
 ## Production Readiness Concerns
 
