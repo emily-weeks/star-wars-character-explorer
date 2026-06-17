@@ -1,25 +1,22 @@
-
 .character-info {
-    /* display: flex;
-    flex-direction: column; */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.9rem;
-    padding: 16px;
-    border: black 1px solid;
-    border-radius: 4px;
-    margin: 12px;
-    text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  padding: 16px;
+  border: black 1px solid;
+  border-radius: 4px;
+  margin: 12px;
+  text-align: left;
 }
 
 p {
-    margin: 4px 0;
+  margin: 4px 0;
 }
 
 .homeworld-info {
-    padding: 8px;
+  padding: 8px;
 }
 
 .film-info {
-    padding: 8px;
+  padding: 8px;
 }
