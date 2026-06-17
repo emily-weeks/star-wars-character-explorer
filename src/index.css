@@ -1,0 +1,21 @@
+.App {
+  text-align: left;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.character-card {
+  padding: 12px;
+  border: black 1px solid;
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+}
