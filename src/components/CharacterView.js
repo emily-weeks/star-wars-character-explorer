@@ -10,26 +10,36 @@ function CharacterView() {
     const navigate = useNavigate();
     const location = useLocation();
     const character = location.state;
-    console.log(character);
 
     
     useEffect(() => {
         const fetchFilms = async () => {
-            setLoadingFilm(true);
             try {
-                const filmPromises = character.films.map(async (film) => {
-                    const response = await fetch(film);
+                setLoadingFilm(true);
+        
+                const filmPromises = character.films.map(async (filmUrl) => {
+                    const response = await fetch(filmUrl);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     const result = await response.json();
-                    return result.title;                  
+                    return result.title;
                 });
 
-                const loadedFilms = await Promise.all(filmPromises);
+                const results = await Promise.allSettled(filmPromises);
+                
+                // Check if all films failed to load
+                if (results.every(r => r.status === "rejected")) throw new Error("Network response was not ok");
+
+                const loadedFilms = results.map(res => 
+                    res.status === "fulfilled" ? res.value : "Unable to Load Film"
+                );
+
+                console.log(loadedFilms);   
 
                 setFilms(loadedFilms);
-                setLoadingFilm(false);
             } catch (error) {
                 console.log(error);
-                setFilms(["The force is not strong with this one, unable to fetch films"]);
+                setFilms(["The force is not strong with this one. Unable to fetch films"]);
+            } finally {
                 setLoadingFilm(false);
             }
         };
@@ -50,7 +60,7 @@ function CharacterView() {
 
         fetchFilms();
         fetchHomeWorld();
-    }, []);
+    }, [character]);
 
   return (
     <div>

@@ -1,85 +1,57 @@
-# star-wars-character-explorer
-Star Wars Character Explorer
+# Star Wars Character Explorer
 
+## Description
 
-# Getting Started with Create React App
+A React applicaiton to browse through Star Wars characters using [Star Wars API](https://swapi.info/) (SWAPI).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Set Up
 
-In the project directory, you can run:
+1. Clone the Star Wars Character Explorer Respository:
 
-### `npm start`
+        git clone https://github.com/emily-weeks/star-wars-character-explorer.git
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Install dependencies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+        npm install
 
-### `npm test`
+3. Start the app:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        npm start
 
-### `npm run build`
+4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Bugs & Rough Edges
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Put any issues encountered:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Films were being double listed
 
-### `npm run eject`
+    - The application was executing independent async fetch requests inside a loop and updating the component state sequentially.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    - Added Promise.all() to fetch logic to wait until all calls are finished before assigning results in a single state update
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- If even one film request failed, the entire film list would fail to render - need to implement partial rendering of films
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    - Promise.all() breaks and reject if one of the promises in the array fails
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    - Switch to [Promise.allSettled()]{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled} and check if promise was successful or failed for partial rendering. Also added check for when every film call fails
 
-## Learn More
+## Production Readiness Concerns
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Place to put any items I would want to change?
+Can pull from items listed below
+- Performance: If the API grew to be really large, how would my app handle that?
 
 
 ## Notes:
+
 Created CharacterList and CharacterView Components and added Routing.
 
 Still Need To:
-1. Fix fallback for films (if only a few fail and some are successful)
-2. Fix CharacterList load so it doesnt reload when navigating back from detail view
-3. Add Search
-4. Update README
-5. Possibly work on styling and improvements!
+1. Fix CharacterList load so it doesnt reload when navigating back from detail view
+2. Update README
+3. Possibly work on styling and improvements!
+4. Fix character view url using id
+5. Possible way to fix search - having it have more exact matches at the top; having it not disrupt the page you were at before searching

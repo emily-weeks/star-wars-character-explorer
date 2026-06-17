@@ -2,6 +2,12 @@
   text-align: left;
 }
 
+.input-field {
+  display: flex;
+  padding: 12px;
+  width: 40%;
+}
+
 .nav-buttons {
   display: flex;
   justify-content: space-around;
