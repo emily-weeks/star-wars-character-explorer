@@ -1,11 +1,12 @@
-// import React, { useState, useEffect } from "react";
-
 // import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import CharacterList from "./components/CharacterList";
-import CharacterView from "./components/CharacterView";
+import './components/character-list/CharacterList.css';
+import './components/character-view/CharacterView.css';
+
+import CharacterList from "./components/character-list/CharacterList";
+import CharacterView from "./components/character-view/CharacterView";
 
 
 function App() {

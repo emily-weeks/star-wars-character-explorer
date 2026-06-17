@@ -65,7 +65,7 @@ function CharacterList() {
 
   return (
     <div>
-        <h3>Character List:</h3>
+        <h2>Character List:</h2>
 
         {error ? (
             <>
@@ -95,20 +95,25 @@ function CharacterList() {
                             </button>
                         </div>
 
-                        {searchingCharacters.length === 0 ? 
-                        (
-                            <div>No matches found for "{searchTerm}". Try checking your spelling or searching for someone else!</div>
+                        {searchingCharacters.length < characterList.length ? (
+                            <h4>{searchingCharacters.length} matches found for "{searchTerm}"</h4>
+                        ) : searchingCharacters.length === 0 ? (
+                            <h4>No matches found for "{searchTerm}". Try checking your spelling or searching for someone else!</h4>
                         ) : (
-                            currentCharacters.map((character) => (
+                            <h4>{searchingCharacters.length} Characters</h4>
+                        )}
+
+                        <div className="card-grid">
+                            {currentCharacters.map((character) => (
                                 <button className="character-card" key={character.name} onClick={() => ViewDetails(character)}>
-                                    <div className="character-name" >{character.name}</div>
-                                    <div className="character-info">
+                                    <h3 className="character-name" >{character.name}</h3>
+                                    <div className="character-basic-info">
                                         <div>Birth Year: {character.birth_year}</div>
                                         <div>Gender: {character.gender}</div>
                                     </div>
                                 </button>
-                            ))
-                        )}
+                            ))}
+                        </div>
                     </>
                 )}
             </>

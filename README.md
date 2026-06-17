@@ -44,9 +44,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Production Readiness Concerns
 
-Place to put any items I would want to change?
-Can pull from items listed below
 - Performance: If the API grew to be really large, how would my app handle that?
+
+- Better user experience if the page didn't reload when navigating back to Character List - Utlizing some kind of caching (TanStack Query, Provider for context, or loading with App.js?)
 
 
 ## Notes:
@@ -56,5 +56,4 @@ Created CharacterList and CharacterView Components and added Routing.
 Still Need To:
 1. Fix CharacterList load so it doesnt reload when navigating back from detail view
 2. Update README
-3. Possibly work on styling and improvements!
-5. Possible way to fix search - having it have more exact matches at the top; having it not disrupt the page you were at before searching
+3. Possible way to fix search - having it have more exact matches at the top; having it not disrupt the page you were at before searching

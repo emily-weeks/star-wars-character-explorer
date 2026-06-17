@@ -77,24 +77,31 @@ function CharacterView() {
     return (
         <div>
             <button onClick={() => navigate("/")}>Back to Character List</button>
-            <h3>Character: {character.name}</h3>
-            <p>Height: {character.height} cm</p>
-            <p>Mass: {character.mass} kg</p>
-            <p>Hair Color: {character.hair_color}</p>
-            <p>Skin Color: {character.skin_color}</p>
-            <p>Eye Color: {character.eye_color}</p>
-            <p>Birth Year: {character.birth_year}</p>
-            <p>Gender: {character.gender}</p>
-            <p>Homeworld: {loadingPlanet ? "Loading location..." : homeWorld}</p>
-            <p>Films:</p>
-            <ul>
-                {loadingFilm ? 
-                    "Loading films..." 
-                : 
-                    films.map((film, index) => (
-                        <li key={index}>{film}</li>
-                    ))}
-            </ul>
+            <h2>Character: {character.name}</h2>
+            <div className="character-info">
+                <div><h5>Height: </h5> {character.height}</div>
+                <div><h5>Mass: </h5>{character.mass}</div>
+                <div><h5>Hair Color: </h5>{character.hair_color}</div>
+                <div><h5>Skin Color: </h5>{character.skin_color}</div>
+                <div><h5>Eye Color: </h5>{character.eye_color}</div>
+                <div><h5>Birth Year: </h5>{character.birth_year}</div>
+                <div><h5>Gender: </h5> {character.gender}</div>
+            </div>
+            <div className="homeworld-info">
+                <h5>Homeworld: </h5>{
+                loadingPlanet ? "Loading location..." : homeWorld}
+            </div>
+            <div className="film-info">
+                <h5>Films:</h5>
+                <ul>
+                    {loadingFilm ? 
+                        "Loading films..." 
+                    : 
+                        films.map((film, index) => (
+                            <li key={index}>{film}</li>
+                        ))}
+                </ul>
+            </div>
         </div>
       );
     }
