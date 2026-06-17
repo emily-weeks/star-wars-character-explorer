@@ -57,5 +57,4 @@ Still Need To:
 1. Fix CharacterList load so it doesnt reload when navigating back from detail view
 2. Update README
 3. Possibly work on styling and improvements!
-4. Fix character view url using id
 5. Possible way to fix search - having it have more exact matches at the top; having it not disrupt the page you were at before searching
